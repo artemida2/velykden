@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Православная Пасха 2026 — 12 апреля. Христос Воскресе! Традиции, рецепты, поздравления и обратный отсчёт до Светлого Воскресения.">
+<meta property="og:title" content="Православная Пасха 2026 — Христос Воскресе!">
+<meta property="og:description" content="12 апреля 2026 — Светлое Христово Воскресение. Традиции, рецепты и поздравления.">
+<title>Православная Пасха 2026 · Христос Воскресе!</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cormorant+SC:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --gold: #D4A843;
+  --gold-light: #F0C96A;
+  --gold-dim: #8A6A20;
+  --crimson: #8B1A1A;
+  --crimson-deep: #5C0E0E;
+  --navy: #0D0D1A;
+  --navy-mid: #131325;
+  --navy-light: #1A1A35;
+  --parchment: #F5EDD8;
+  --parchment-dim: #C9B98E;
+  --white: #FAF6EE;
+  --candle-glow: rgba(212, 168, 67, 0.15);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--parchment);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 18px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── STAR FIELD ── */
+#stars-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 60%, rgba(139,26,26,0.25) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 50% 30%, rgba(212,168,67,0.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.ornament {
+  font-size: 2.4rem;
+  color: var(--gold);
+  letter-spacing: 0.3em;
+  animation: fadeDown 1.4s ease both;
+  user-select: none;
+}
+
+.hero-date {
+  font-family: 'Cormorant SC', serif;
+  font-size: clamp(0.85rem, 2vw, 1.1rem);
+  color: var(--gold-light);
+  letter-spacing: 0.45em;
+  margin-top: 0.6rem;
+  animation: fadeDown 1.6s ease both;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3.2rem, 10vw, 7.5rem);
+  font-weight: 700;
+  color: var(--gold-light);
+  line-height: 1.05;
+  margin-top: 1.2rem;
+  animation: glowIn 2s ease both;
+  text-shadow:
+    0 0 60px rgba(212,168,67,0.5),
+    0 0 120px rgba(212,168,67,0.2);
+}
+
+.hero-subtitle {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.4rem, 4vw, 2.4rem);
+  font-style: italic;
+  color: var(--parchment);
+  margin-top: 0.5rem;
+  animation: fadeUp 2.2s ease both;
+  opacity: 0.9;
+}
+
+.cross-divider {
+  color: var(--gold);
+  font-size: 1.6rem;
+  margin: 1.4rem 0;
+  animation: fadeUp 2.4s ease both;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.cross-divider::before,
+.cross-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+  max-width: 120px;
+}
+
+.hero-tagline {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: var(--parchment-dim);
+  max-width: 540px;
+  animation: fadeUp 2.6s ease both;
+}
+
+.scroll-cue {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  animation: fadeUp 3s ease both;
+  cursor: pointer;
+  color: var(--gold-dim);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.scroll-cue span { animation: bounce 2s ease infinite; display: block; font-size: 1.4rem; }
+
+/* ── COUNTDOWN ── */
+.section {
+  position: relative;
+  z-index: 1;
+  padding: 5rem 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-family: 'Cormorant SC', serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.5em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 0.8rem;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: var(--gold-light);
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.countdown-grid {
+  display: flex;
+  justify-content: center;
+  gap: clamp(1rem, 4vw, 2.5rem);
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.countdown-cell {
+  background: linear-gradient(145deg, var(--navy-light), var(--navy-mid));
+  border: 1px solid var(--gold-dim);
+  border-radius: 4px;
+  padding: 1.5rem 2rem;
+  min-width: 110px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.countdown-cell::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(212,168,67,0.06) 0%, transparent 60%);
+}
+.countdown-num {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 8vw, 5rem);
+  font-weight: 700;
+  color: var(--gold-light);
+  line-height: 1;
+  text-shadow: 0 0 30px rgba(212,168,67,0.4);
+  display: block;
+}
+.countdown-label {
+  font-family: 'Cormorant SC', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.35em;
+  color: var(--parchment-dim);
+  text-transform: uppercase;
+  margin-top: 0.4rem;
+  display: block;
+}
+
+#countdown-done {
+  display: none;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  color: var(--gold-light);
+  text-align: center;
+  text-shadow: 0 0 40px rgba(212,168,67,0.5);
+}
+
+/* ── CANDLES ── */
+.candle-section {
+  z-index: 1;
+  position: relative;
+  background: linear-gradient(180deg, transparent, rgba(139,26,26,0.08), transparent);
+  padding: 4rem 1.5rem;
+  text-align: center;
+}
+
+.candles-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: clamp(1.5rem, 5vw, 4rem);
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.candle-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.2s;
+}
+.candle-wrap:hover { transform: scale(1.05); }
+.candle-wrap:active { transform: scale(0.97); }
+
+.candle-flame {
+  width: 24px;
+  height: 40px;
+  position: relative;
+  opacity: 0;
+  transition: opacity 0.6s;
+}
+.candle-wrap.lit .candle-flame { opacity: 1; }
+
+.flame-inner {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 30px;
+  background: radial-gradient(ellipse at 50% 80%, #fff7c0 0%, #ffcc00 40%, #ff7700 70%, transparent 100%);
+  border-radius: 50% 50% 30% 30%;
+  animation: flicker 0.15s ease-in-out infinite alternate;
+  filter: blur(1px);
+}
+.flame-outer {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 40px;
+  background: radial-gradient(ellipse at 50% 80%, rgba(255,200,50,0.4) 0%, rgba(255,100,0,0.3) 50%, transparent 80%);
+  border-radius: 50% 50% 30% 30%;
+  animation: flicker2 0.2s ease-in-out infinite alternate;
+  filter: blur(3px);
+}
+.glow-ring {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, rgba(255,180,0,0.25) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s;
+}
+.candle-wrap.lit .glow-ring { opacity: 1; }
+
+.candle-body {
+  width: 22px;
+  height: clamp(60px, 12vw, 100px);
+  background: linear-gradient(to right, #e8e0d0, #f5f0e8 30%, #faf8f4 50%, #e8e0d0);
+  border-radius: 3px 3px 2px 2px;
+  position: relative;
+  box-shadow: inset -3px 0 6px rgba(0,0,0,0.15), 2px 4px 12px rgba(0,0,0,0.4);
+  margin-top: 2px;
+}
+.candle-drip {
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 26px;
+  height: 8px;
+  background: radial-gradient(ellipse, #f0ece4, #e8e0d0);
+  border-radius: 50%;
+}
+.candle-holder {
+  width: 36px;
+  height: 10px;
+  background: linear-gradient(to right, #8A6A20, var(--gold), #8A6A20);
+  border-radius: 50%;
+  margin-top: -2px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+}
+
+.candle-hint {
+  color: var(--parchment-dim);
+  font-size: 0.85rem;
+  font-style: italic;
+  margin-top: 2rem;
+  opacity: 0.7;
+}
+#candle-count-msg {
+  margin-top: 1.5rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: var(--gold);
+  min-height: 1.5em;
+  transition: all 0.5s;
+}
+
+/* ── GREETING CARD GENERATOR ── */
+.card-gen {
+  background: linear-gradient(145deg, var(--navy-light), var(--navy-mid));
+  border: 1px solid var(--gold-dim);
+  border-radius: 6px;
+  padding: 2.5rem;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.input-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.2rem;
+}
+.input-row input, .input-row select {
+  flex: 1;
+  min-width: 160px;
+  background: var(--navy);
+  border: 1px solid var(--gold-dim);
+  color: var(--parchment);
+  padding: 0.7rem 1rem;
+  font-family: 'EB Garamond', serif;
+  font-size: 1rem;
+  border-radius: 3px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.input-row input:focus, .input-row select:focus { border-color: var(--gold); }
+.input-row select option { background: var(--navy-mid); }
+
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold-dim), var(--gold), var(--gold-dim));
+  background-size: 200% 100%;
+  color: var(--navy);
+  border: none;
+  padding: 0.8rem 2.2rem;
+  font-family: 'Cormorant SC', serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background-position 0.4s, transform 0.2s, box-shadow 0.3s;
+  box-shadow: 0 4px 20px rgba(212,168,67,0.3);
+}
+.btn-gold:hover {
+  background-position: 100% 0;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(212,168,67,0.5);
+}
+.btn-gold:active { transform: translateY(0); }
+
+#greeting-output {
+  margin-top: 1.5rem;
+  background: var(--navy);
+  border: 1px solid var(--gold-dim);
+  border-radius: 4px;
+  padding: 1.5rem;
+  display: none;
+  position: relative;
+  overflow: hidden;
+}
+#greeting-output::before {
+  content: '✝';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10rem;
+  color: rgba(212,168,67,0.04);
+  pointer-events: none;
+}
+#greeting-text {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  line-height: 1.6;
+  color: var(--parchment);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.copy-btn {
+  display: block;
+  margin: 1rem auto 0;
+  background: none;
+  border: 1px solid var(--gold-dim);
+  color: var(--gold);
+  padding: 0.4rem 1.4rem;
+  font-family: 'EB Garamond', serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.3s;
+}
+.copy-btn:hover { background: rgba(212,168,67,0.1); border-color: var(--gold); }
+
+/* ── TRADITIONS ── */
+.traditions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.tradition-card {
+  background: linear-gradient(145deg, var(--navy-light), var(--navy-mid));
+  border: 1px solid var(--gold-dim);
+  border-radius: 4px;
+  padding: 1.8rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+.tradition-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px var(--gold-dim);
+}
+.tradition-card::before {
+  content: attr(data-icon);
+  position: absolute;
+  top: -0.5rem;
+  right: 1rem;
+  font-size: 4rem;
+  opacity: 0.12;
+  pointer-events: none;
+  user-select: none;
+}
+.tradition-icon {
+  font-size: 2.4rem;
+  margin-bottom: 0.8rem;
+  display: block;
+}
+.tradition-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  color: var(--gold-light);
+  margin-bottom: 0.6rem;
+}
+.tradition-text {
+  font-size: 0.95rem;
+  color: var(--parchment-dim);
+  line-height: 1.65;
+}
+
+/* ── EGG PAINTER ── */
+.egg-studio {
+  background: linear-gradient(145deg, var(--navy-light), var(--navy-mid));
+  border: 1px solid var(--gold-dim);
+  border-radius: 6px;
+  padding: 2.5rem;
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.egg-container {
+  position: relative;
+  display: inline-block;
+  margin: 1.5rem 0;
+}
+
+#egg-canvas {
+  display: block;
+  cursor: crosshair;
+  border-radius: 8px;
+}
+
+.color-palette {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin: 1rem 0;
+}
+.color-swatch {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.color-swatch:hover { transform: scale(1.2); }
+.color-swatch.active { border-color: var(--gold-light); transform: scale(1.15); }
+
+.brush-row {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  margin: 0.8rem 0;
+  flex-wrap: wrap;
+}
+.brush-btn {
+  background: var(--navy);
+  border: 1px solid var(--gold-dim);
+  color: var(--parchment-dim);
+  padding: 0.4rem 1rem;
+  font-family: 'EB Garamond', serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+.brush-btn:hover, .brush-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(212,168,67,0.08); }
+
+/* ── RECIPES ACCORDION ── */
+.recipe-list { max-width: 720px; margin: 0 auto; }
+.recipe-item {
+  border: 1px solid var(--gold-dim);
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+.recipe-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 1.5rem;
+  cursor: pointer;
+  background: linear-gradient(145deg, var(--navy-light), var(--navy-mid));
+  transition: background 0.3s;
+  user-select: none;
+}
+.recipe-header:hover { background: linear-gradient(145deg, rgba(26,26,53,0.9), rgba(19,19,37,0.9)); }
+.recipe-header-left { display: flex; align-items: center; gap: 1rem; }
+.recipe-emoji { font-size: 2rem; }
+.recipe-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--gold-light);
+}
+.recipe-chevron {
+  color: var(--gold);
+  font-size: 1.2rem;
+  transition: transform 0.35s;
+  flex-shrink: 0;
+}
+.recipe-item.open .recipe-chevron { transform: rotate(180deg); }
+.recipe-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1);
+  background: var(--navy);
+}
+.recipe-item.open .recipe-body { max-height: 1200px; }
+.recipe-content { padding: 1.5rem; }
+.ingredient-list {
+  list-style: none;
+  margin-bottom: 1.2rem;
+}
+.ingredient-list li {
+  padding: 0.3rem 0;
+  color: var(--parchment-dim);
+  font-size: 0.95rem;
+  border-bottom: 1px solid rgba(212,168,67,0.1);
+}
+.ingredient-list li::before { content: '◆ '; color: var(--gold-dim); font-size: 0.7rem; }
+.recipe-steps {
+  counter-reset: steps;
+  list-style: none;
+}
+.recipe-steps li {
+  counter-increment: steps;
+  padding: 0.5rem 0 0.5rem 2.5rem;
+  position: relative;
+  color: var(--parchment-dim);
+  font-size: 0.95rem;
+}
+.recipe-steps li::before {
+  content: counter(steps);
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  background: var(--gold-dim);
+  color: var(--navy);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant SC', serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.recipe-subtitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: var(--gold);
+  margin: 1rem 0 0.5rem;
+}
+
+/* ── TROPARION ── */
+.troparion-block {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  padding: 3rem 2rem;
+  background: linear-gradient(145deg, var(--navy-light), var(--navy-mid));
+  border: 1px solid var(--gold-dim);
+  border-radius: 6px;
+}
+.troparion-block::before, .troparion-block::after {
+  content: '';
+  position: absolute;
+  left: 1.5rem; right: 1.5rem;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+}
+.troparion-block::before { top: 1rem; }
+.troparion-block::after { bottom: 1rem; }
+
+.troparion-cross {
+  font-size: 2.5rem;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  display: block;
+  text-shadow: 0 0 20px rgba(212,168,67,0.5);
+}
+.troparion-text {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.1rem, 3vw, 1.45rem);
+  font-style: italic;
+  line-height: 1.9;
+  color: var(--parchment);
+}
+.troparion-lang-btn {
+  margin-top: 1.5rem;
+  background: none;
+  border: 1px solid var(--gold-dim);
+  color: var(--gold-dim);
+  padding: 0.4rem 1.2rem;
+  font-family: 'EB Garamond', serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.3s;
+}
+.troparion-lang-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── FOOTER ── */
+footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 3rem 1.5rem;
+  border-top: 1px solid rgba(212,168,67,0.15);
+  color: var(--parchment-dim);
+  font-size: 0.9rem;
+}
+footer .footer-cross {
+  font-size: 2rem;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.8rem;
+  text-shadow: 0 0 15px rgba(212,168,67,0.4);
+}
+.share-row {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+.share-btn {
+  background: var(--navy-light);
+  border: 1px solid var(--gold-dim);
+  color: var(--parchment-dim);
+  padding: 0.5rem 1.3rem;
+  font-family: 'EB Garamond', serif;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+.share-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(212,168,67,0.08); }
+
+/* ── DIVIDER ── */
+.section-divider {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 1rem;
+  color: var(--gold);
+  font-size: 1.2rem;
+  letter-spacing: 0.5em;
+  opacity: 0.5;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to bottom, rgba(13,13,26,0.95), transparent);
+}
+.nav-brand {
+  font-family: 'Cormorant SC', serif;
+  color: var(--gold);
+  font-size: 1rem;
+  letter-spacing: 0.3em;
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a {
+  color: var(--parchment-dim);
+  text-decoration: none;
+  font-family: 'Cormorant SC', serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--gold); }
+
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  nav { padding: 0.8rem 1.2rem; }
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes glowIn {
+  0%   { opacity: 0; transform: scale(0.95); filter: blur(4px); }
+  100% { opacity: 1; transform: scale(1);    filter: blur(0); }
+}
+@keyframes flicker {
+  from { transform: translateX(-50%) scaleX(0.92) scaleY(1); }
+  to   { transform: translateX(-50%) scaleX(1.08) scaleY(0.97); }
+}
+@keyframes flicker2 {
+  from { opacity: 0.7; transform: translateX(-50%) scaleX(0.88); }
+  to   { opacity: 1;   transform: translateX(-50%) scaleX(1.12); }
+}
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(8px); }
+}
+@keyframes shimmer {
+  from { background-position: -200% center; }
+  to   { background-position:  200% center; }
+}
+
+/* reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* egg celebration */
+@keyframes confettiFall {
+  0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(120px) rotate(720deg); opacity: 0; }
+}
+.confetti-piece {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  pointer-events: none;
+  animation: confettiFall 1.5s ease-in both;
+  z-index: 999;
+}
+</style>
+</head>
+<body>
+
+<canvas id="stars-canvas"></canvas>
+
+<nav>
+  <a class="nav-brand" href="#">✝ Пасха 2026</a>
+  <div class="nav-links">
+    <a href="#countdown">Отсчёт</a>
+    <a href="#candles">Свечи</a>
+    <a href="#greeting">Поздравление</a>
+    <a href="#traditions">Традиции</a>
+    <a href="#recipes">Рецепты</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="ornament">✦ ✝ ✦</div>
+  <p class="hero-date">12 Апреля 2026 · Светлое Христово Воскресение</p>
+  <h1 class="hero-title">Христос<br>Воскресе!</h1>
+  <p class="hero-subtitle">Воистину Воскресе!</p>
+  <div class="cross-divider">✝</div>
+  <p class="hero-tagline">Светлейший и торжественнейший из всех православных праздников. Победа жизни над смертью, света над тьмой.</p>
+  <div class="scroll-cue" onclick="document.getElementById('countdown').scrollIntoView({behavior:'smooth'})">
+    Ниже
+    <span>↓</span>
+  </div>
+</section>
+
+<!-- COUNTDOWN -->
+<div class="section" id="countdown">
+  <div class="reveal">
+    <p class="section-label">Обратный отсчёт</p>
+    <h2 class="section-title">До Светлого Воскресения</h2>
+    <div class="countdown-grid">
+      <div class="countdown-cell">
+        <span class="countdown-num" id="cd-days">—</span>
+        <span class="countdown-label">Дней</span>
+      </div>
+      <div class="countdown-cell">
+        <span class="countdown-num" id="cd-hours">—</span>
+        <span class="countdown-label">Часов</span>
+      </div>
+      <div class="countdown-cell">
+        <span class="countdown-num" id="cd-mins">—</span>
+        <span class="countdown-label">Минут</span>
+      </div>
+      <div class="countdown-cell">
+        <span class="countdown-num" id="cd-secs">—</span>
+        <span class="countdown-label">Секунд</span>
+      </div>
+    </div>
+    <div id="countdown-done">
+      ✝ Христос Воскресе! Воистину Воскресе! ✝
+    </div>
+  </div>
+</div>
+
+<div class="section-divider">· · · ✦ · · ·</div>
+
+<!-- TROPARION -->
+<div class="section" id="troparion">
+  <div class="reveal">
+    <p class="section-label">Пасхальный тропарь</p>
+    <h2 class="section-title">Глас Торжества</h2>
+    <div class="troparion-block">
+      <span class="troparion-cross">☩</span>
+      <p class="troparion-text" id="troparion-text">
+        Христос воскресе из мертвых,<br>
+        смертию смерть поправ,<br>
+        и сущим во гробех<br>
+        живот даровав.
+      </p>
+      <button class="troparion-lang-btn" onclick="toggleTroparion()">Показать по-русски</button>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider">· · · ✦ · · ·</div>
+
+<!-- CANDLES -->
+<div class="candle-section" id="candles">
+  <div class="reveal">
+    <p class="section-label">Пасхальная молитва</p>
+    <h2 class="section-title" style="font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.2rem);color:var(--gold-light);margin-bottom:1rem;">
+      Зажгите свечу
+    </h2>
+    <p style="color:var(--parchment-dim);font-style:italic;max-width:480px;margin:0 auto;">
+      В пасхальную ночь верующие несут огонь из храма домой. Нажмите на свечу — зажгите свет в своём сердце.
+    </p>
+    <div class="candles-row" id="candles-row"></div>
+    <p class="candle-hint">Нажмите на свечу, чтобы зажечь её</p>
+    <p id="candle-count-msg"></p>
+  </div>
+</div>
+
+<div class="section-divider">· · · ✦ · · ·</div>
+
+<!-- GREETING GENERATOR -->
+<div class="section" id="greeting">
+  <div class="reveal">
+    <p class="section-label">Интерактив</p>
+    <h2 class="section-title">Пасхальное поздравление</h2>
+    <div class="card-gen">
+      <div class="input-row">
+        <input type="text" id="recipient-name" placeholder="Имя получателя" maxlength="40">
+        <select id="greeting-style">
+          <option value="warm">Тёплое</option>
+          <option value="formal">Торжественное</option>
+          <option value="family">Семейное</option>
+          <option value="short">Краткое</option>
+        </select>
+      </div>
+      <div style="text-align:center;">
+        <button class="btn-gold" onclick="generateGreeting()">✦ Создать поздравление</button>
+      </div>
+      <div id="greeting-output">
+        <p id="greeting-text"></p>
+        <button class="copy-btn" onclick="copyGreeting()">✦ Скопировать</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider">· · · ✦ · · ·</div>
+
+<!-- EGG PAINTER -->
+<div class="section" id="egg-paint">
+  <div class="reveal">
+    <p class="section-label">Творчество</p>
+    <h2 class="section-title">Раскрасьте пасхальное яйцо</h2>
+    <div class="egg-studio">
+      <p style="color:var(--parchment-dim);font-size:0.95rem;margin-bottom:1rem;">
+        Выберите цвет и рисуйте прямо на яйце. Создайте свою крашенку!
+      </p>
+      <div class="color-palette" id="color-palette"></div>
+      <div class="brush-row">
+        <button class="brush-btn active" data-size="8" onclick="selectBrush(this,8)">Тонкая</button>
+        <button class="brush-btn" data-size="16" onclick="selectBrush(this,16)">Средняя</button>
+        <button class="brush-btn" data-size="28" onclick="selectBrush(this,28)">Толстая</button>
+        <button class="brush-btn" data-size="0" onclick="selectBrush(this,0)">Ластик</button>
+      </div>
+      <div class="egg-container">
+        <canvas id="egg-canvas" width="320" height="400"></canvas>
+      </div>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:0.5rem;">
+        <button class="btn-gold" onclick="downloadEgg()" style="font-size:0.9rem;padding:0.6rem 1.5rem;">
+          ↓ Сохранить
+        </button>
+        <button class="brush-btn" onclick="clearEgg()">✕ Очистить</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider">· · · ✦ · · ·</div>
+
+<!-- TRADITIONS -->
+<div class="section" id="traditions">
+  <div class="reveal">
+    <p class="section-label">Культура и вера</p>
+    <h2 class="section-title">Пасхальные традиции</h2>
+    <div class="traditions-grid">
+      <div class="tradition-card" data-icon="🕯">
+        <span class="tradition-icon">🕯️</span>
+        <h3 class="tradition-title">Крестный ход</h3>
+        <p class="tradition-text">В полночь с субботы на воскресенье совершается крестный ход вокруг храма. Верующие несут зажжённые свечи и поют «Христос Воскресе», возвещая миру о Воскресении.</p>
+      </div>
+      <div class="tradition-card" data-icon="🥚">
+        <span class="tradition-icon">🥚</span>
+        <h3 class="tradition-title">Крашенки и писанки</h3>
+        <p class="tradition-text">Красное яйцо — символ Воскресения и новой жизни. По преданию, Мария Магдалина принесла яйцо императору Тиберию, которое покраснело в её руках.</p>
+      </div>
+      <div class="tradition-card" data-icon="🍞">
+        <span class="tradition-icon">🍞</span>
+        <h3 class="tradition-title">Освящение куличей</h3>
+        <p class="tradition-text">В Великую субботу верующие приносят в храм пасхальные куличи, творожную пасху и яйца для освящения. Освящённые яства вкушаются после пасхальной службы.</p>
+      </div>
+      <div class="tradition-card" data-icon="☩">
+        <span class="tradition-icon">☩</span>
+        <h3 class="tradition-title">Христосование</h3>
+        <p class="tradition-text">При встрече православные трижды целуются и обмениваются приветствием: «Христос Воскресе!» — «Воистину Воскресе!». Этот обычай восходит к апостольским временам.</p>
+      </div>
+      <div class="tradition-card" data-icon="🔔">
+        <span class="tradition-icon">🔔</span>
+        <h3 class="tradition-title">Пасхальный звон</h3>
+        <p class="tradition-text">На Светлой седмице двери колокольни открыты для всех желающих. Пасхальный благовест — радостный, торжественный, не похожий ни на какой другой церковный звон.</p>
+      </div>
+      <div class="tradition-card" data-icon="🌿">
+        <span class="tradition-icon">🌿</span>
+        <h3 class="tradition-title">Вербное воскресенье</h3>
+        <p class="tradition-text">За неделю до Пасхи — Вход Господень в Иерусалим. Верующие приносят в храм ветви вербы — первого дерева, пробуждающегося после зимы, символа жизни.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider">· · · ✦ · · ·</div>
+
+<!-- RECIPES -->
+<div class="section" id="recipes">
+  <div class="reveal">
+    <p class="section-label">Пасхальная кухня</p>
+    <h2 class="section-title">Рецепты</h2>
+    <div class="recipe-list" id="recipe-list"></div>
+  </div>
+</div>
+
+<div class="section-divider">· · · ✦ · · ·</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-cross">✝</span>
+  <p style="font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--gold-light);margin-bottom:0.5rem;">
+    Христос Воскресе!
+  </p>
+  <p style="font-style:italic;margin-bottom:1.5rem;">
+    Поделитесь радостью Пасхи с близкими
+  </p>
+  <div class="share-row">
+    <a class="share-btn" href="https://vk.com/share.php?url=&title=Христос+Воскресе!+Православная+Пасха+12+апреля+2026" target="_blank" rel="noopener">ВКонтакте</a>
+    <a class="share-btn" href="https://t.me/share/url?url=&text=Христос+Воскресе!+Православная+Пасха+12+апреля+2026" target="_blank" rel="noopener">Telegram</a>
+    <button class="share-btn" onclick="copyLink()">Скопировать ссылку</button>
+  </div>
+  <p style="color:var(--gold-dim);font-size:0.8rem;margin-top:2rem;">
+    Православная Пасха · 12 апреля 2026 года
+  </p>
+</footer>
+
+<script>
+// ── STARS ──
+const starCanvas = document.getElementById('stars-canvas');
+const sCtx = starCanvas.getContext('2d');
+let stars = [];
+function initStars() {
+  starCanvas.width = window.innerWidth;
+  starCanvas.height = window.innerHeight;
+  stars = Array.from({length: 160}, () => ({
+    x: Math.random() * starCanvas.width,
+    y: Math.random() * starCanvas.height,
+    r: Math.random() * 1.2 + 0.2,
+    a: Math.random(),
+    speed: Math.random() * 0.003 + 0.001,
+    phase: Math.random() * Math.PI * 2
+  }));
+}
+function drawStars(t) {
+  sCtx.clearRect(0, 0, starCanvas.width, starCanvas.height);
+  stars.forEach(s => {
+    s.a = 0.3 + 0.7 * (0.5 + 0.5 * Math.sin(t * s.speed + s.phase));
+    sCtx.beginPath();
+    sCtx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    sCtx.fillStyle = `rgba(245,237,216,${s.a})`;
+    sCtx.fill();
+  });
+  requestAnimationFrame(drawStars);
+}
+initStars();
+requestAnimationFrame(drawStars);
+window.addEventListener('resize', initStars);
+
+// ── COUNTDOWN ──
+const EASTER = new Date('2026-04-12T00:00:00+03:00');
+function pad(n) { return String(n).padStart(2,'0'); }
+function tick() {
+  const now = new Date();
+  const diff = EASTER - now;
+  if (diff <= 0) {
+    document.querySelector('.countdown-grid').style.display = 'none';
+    document.getElementById('countdown-done').style.display = 'block';
+    return;
+  }
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cd-days').textContent  = pad(d);
+  document.getElementById('cd-hours').textContent = pad(h);
+  document.getElementById('cd-mins').textContent  = pad(m);
+  document.getElementById('cd-secs').textContent  = pad(s);
+}
+tick();
+setInterval(tick, 1000);
+
+// ── CANDLES ──
+const candleMessages = [
+  '','Один огонёк уже светит в ночи...','Два огня разгоняют тьму...','Три свечи — Свет Троицы...','Четыре огня — чудесный свет!','Пять свечей горят во славу!','Шесть огней — как шесть дней творения','Семь свечей — символ полноты!','Восемь огней — пасхальное число!','Девять свечей — хор ангелов!','Все десять свечей зажжены! Христос Воскресе! ✝'
+];
+const row = document.getElementById('candles-row');
+for (let i = 0; i < 10; i++) {
+  const heights = [90,110,80,100,120,95,115,85,105,90];
+  row.innerHTML += `
+    <div class="candle-wrap" onclick="lightCandle(this)">
+      <div class="candle-flame">
+        <div class="flame-outer"></div>
+        <div class="flame-inner"></div>
+      </div>
+      <div class="glow-ring"></div>
+      <div class="candle-body" style="height:${heights[i]}px"><div class="candle-drip"></div></div>
+      <div class="candle-holder"></div>
+    </div>`;
+}
+function lightCandle(el) {
+  if (el.classList.contains('lit')) { el.classList.remove('lit'); countCandles(); return; }
+  el.classList.add('lit');
+  countCandles();
+}
+function countCandles() {
+  const n = document.querySelectorAll('.candle-wrap.lit').length;
+  const msg = document.getElementById('candle-count-msg');
+  msg.textContent = candleMessages[n] || '';
+}
+
+// ── TROPARION ──
+const troparionCSl = `Христос воскресе из мертвых,<br>смертию смерть поправ,<br>и сущим во гробех<br>живот даровав.`;
+const troparionRu  = `Христос воскрес из мёртвых,<br>смертью смерть поправ,<br>и находящимся в гробах<br>жизнь даровав.`;
+let isCSl = true;
+function toggleTroparion() {
+  isCSl = !isCSl;
+  document.getElementById('troparion-text').innerHTML = isCSl ? troparionCSl : troparionRu;
+  document.querySelector('.troparion-lang-btn').textContent = isCSl ? 'Показать по-русски' : 'Церковнославянский';
+}
+
+// ── GREETING GENERATOR ──
+const greetings = {
+  warm: [
+    n=>`Дорогой(ая) ${n}!\n\nХристос Воскресе! 🥚✨\n\nВ этот светлейший день желаю тебе радости, тепла и мира в сердце. Пусть Пасхальный свет осветит твой дом и наполнит жизнь благодатью!\n\nВоистину Воскресе! ☩`,
+    n=>`Дорогой(ая) ${n},\n\nХристос Воскресе! Пусть этот праздник принесёт в твою жизнь свет надежды, тепло любви и радость веры. Желаю тебе здоровья, душевного покоя и счастья!\n\n✝ Воистину Воскресе!`
+  ],
+  formal: [
+    n=>`Уважаемый(ая) ${n},\n\nПримите самые искренние поздравления со Светлым Христовым Воскресением!\n\nЖелаю Вам духовной радости, крепкого здоровья и благополучия. Пусть пасхальная благодать пребывает с Вами весь год.\n\nХристос Воскресе! ☩`,
+    n=>`Дорогой(ая) ${n},\n\nС великой пасхальной радостью поздравляю Вас со Светлым Христовым Воскресением!\n\nВоистину Воскресе! Пусть этот праздник будет для Вас источником вдохновения, веры и духовного обновления.\n\n☩`
+  ],
+  family: [
+    n=>`${n}, с Пасхой! 🥚🕯\n\nХристос Воскресе! Желаю нашей семье здоровья, любви и радости. Пусть в нашем доме всегда будет мир и благодать!\n\nВоистину Воскресе! С любовью ✝`,
+    n=>`Любимый(ая) ${n}!\n\nХристос Воскресе! 🌷 Пасха — это праздник нашей семьи, нашей любви и нашей веры. Желаю тебе счастья и радости, пусть Господь хранит тебя!\n\n☩ Воистину Воскресе!`
+  ],
+  short: [
+    n=>`${n}, Христос Воскресе! 🥚✨\nВоистину Воскресе! Со Светлым праздником! ☩`,
+    n=>`✝ Христос Воскресе, ${n}!\nВоистину Воскресе! С Пасхой! 🕯`
+  ]
+};
+
+function generateGreeting() {
+  const name = document.getElementById('recipient-name').value.trim() || 'Дорогой друг';
+  const style = document.getElementById('greeting-style').value;
+  const variants = greetings[style];
+  const text = variants[Math.floor(Math.random() * variants.length)](name);
+  const el = document.getElementById('greeting-text');
+  const out = document.getElementById('greeting-output');
+  el.innerHTML = text.replace(/\n/g, '<br>');
+  out.style.display = 'block';
+  out.style.animation = 'none';
+  void out.offsetWidth;
+  out.style.animation = 'fadeUp 0.6s ease both';
+}
+
+function copyGreeting() {
+  const text = document.getElementById('greeting-text').innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = '✓ Скопировано!';
+    btn.style.color = 'var(--gold-light)';
+    setTimeout(() => { btn.textContent = '✦ Скопировать'; btn.style.color = ''; }, 2000);
+  });
+}
+
+// ── EGG PAINTER ──
+const palette = [
+  '#C0392B','#E74C3C','#E67E22','#F39C12','#D4A843',
+  '#27AE60','#1ABC9C','#2980B9','#8E44AD','#BDC3C7',
+  '#8B4513','#F9F9F9','#2C3E50','#D35400','#16A085'
+];
+const palEl = document.getElementById('color-palette');
+let currentColor = palette[0];
+let brushSize = 8;
+let isEraser = false;
+palette.forEach((c,i) => {
+  const sw = document.createElement('div');
+  sw.className = 'color-swatch' + (i===0?' active':'');
+  sw.style.background = c;
+  sw.onclick = () => {
+    document.querySelectorAll('.color-swatch').forEach(s=>s.classList.remove('active'));
+    sw.classList.add('active');
+    currentColor = c;
+    isEraser = false;
+    document.querySelectorAll('.brush-btn').forEach(b=>{ if(b.dataset.size!=='0') b.classList.remove('active'); });
+    document.querySelector('.brush-btn[data-size="8"]').classList.add('active');
+  };
+  palEl.appendChild(sw);
+});
+
+function selectBrush(btn, size) {
+  document.querySelectorAll('.brush-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  brushSize = size;
+  isEraser = size === 0;
+}
+
+const eggCanvas = document.getElementById('egg-canvas');
+const eCtx = eggCanvas.getContext('2d');
+let drawing = false;
+let lastPt = null;
+
+function drawEggBase() {
+  eCtx.clearRect(0,0,320,400);
+  // egg shape clip
+  eCtx.save();
+  eCtx.beginPath();
+  eCtx.ellipse(160, 195, 115, 150, 0, 0, Math.PI*2);
+  eCtx.fillStyle = '#F5F0E8';
+  eCtx.fill();
+  // subtle gradient
+  const grad = eCtx.createRadialGradient(120, 130, 10, 160, 195, 150);
+  grad.addColorStop(0,'rgba(255,255,255,0.6)');
+  grad.addColorStop(1,'rgba(180,160,130,0.3)');
+  eCtx.fillStyle = grad;
+  eCtx.fill();
+  eCtx.restore();
+  // outline
+  eCtx.beginPath();
+  eCtx.ellipse(160, 195, 115, 150, 0, 0, Math.PI*2);
+  eCtx.strokeStyle = '#D4A843';
+  eCtx.lineWidth = 2.5;
+  eCtx.stroke();
+}
+
+function getEggPos(e) {
+  const rect = eggCanvas.getBoundingClientRect();
+  const scaleX = eggCanvas.width / rect.width;
+  const scaleY = eggCanvas.height / rect.height;
+  const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+  const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+  return { x: (clientX - rect.left) * scaleX, y: (clientY - rect.top) * scaleY };
+}
+
+function isInsideEgg(x,y) {
+  return Math.pow((x-160)/115,2) + Math.pow((y-195)/150,2) <= 1;
+}
+
+function paintAt(x, y) {
+  if (!isInsideEgg(x,y)) return;
+  eCtx.save();
+  eCtx.beginPath();
+  eCtx.ellipse(160, 195, 115, 150, 0, 0, Math.PI*2);
+  eCtx.clip();
+  if (isEraser) {
+    const grad = eCtx.createRadialGradient(120,130,10,160,195,150);
+    grad.addColorStop(0,'rgba(255,255,255,0.6)');
+    grad.addColorStop(1,'rgba(180,160,130,0.3)');
+    eCtx.globalCompositeOperation = 'source-over';
+    eCtx.fillStyle = '#F5F0E8';
+    eCtx.beginPath();
+    eCtx.arc(x,y,16,0,Math.PI*2);
+    eCtx.fill();
+  } else {
+    eCtx.beginPath();
+    if (lastPt) {
+      eCtx.moveTo(lastPt.x,lastPt.y);
+      eCtx.lineTo(x,y);
+      eCtx.strokeStyle = currentColor;
+      eCtx.lineWidth = brushSize;
+      eCtx.lineCap = 'round';
+      eCtx.lineJoin = 'round';
+      eCtx.stroke();
+    }
+    eCtx.beginPath();
+    eCtx.arc(x,y,brushSize/2,0,Math.PI*2);
+    eCtx.fillStyle = currentColor;
+    eCtx.fill();
+  }
+  eCtx.restore();
+}
+
+eggCanvas.addEventListener('mousedown', e => { drawing=true; lastPt=getEggPos(e); paintAt(lastPt.x,lastPt.y); });
+eggCanvas.addEventListener('mousemove', e => { if(!drawing) return; const p=getEggPos(e); paintAt(p.x,p.y); lastPt=p; });
+eggCanvas.addEventListener('mouseup', ()=>{drawing=false;lastPt=null;});
+eggCanvas.addEventListener('mouseleave', ()=>{drawing=false;lastPt=null;});
+eggCanvas.addEventListener('touchstart', e=>{e.preventDefault();drawing=true;lastPt=getEggPos(e);paintAt(lastPt.x,lastPt.y);},{passive:false});
+eggCanvas.addEventListener('touchmove', e=>{e.preventDefault();if(!drawing)return;const p=getEggPos(e);paintAt(p.x,p.y);lastPt=p;},{passive:false});
+eggCanvas.addEventListener('touchend', ()=>{drawing=false;lastPt=null;});
+
+function clearEgg() { drawEggBase(); }
+
+function downloadEgg() {
+  // overlay outline on top
+  eCtx.beginPath();
+  eCtx.ellipse(160, 195, 115, 150, 0, 0, Math.PI*2);
+  eCtx.strokeStyle = '#D4A843';
+  eCtx.lineWidth = 2.5;
+  eCtx.stroke();
+  const link = document.createElement('a');
+  link.download = 'paskha-2026-egg.png';
+  link.href = eggCanvas.toDataURL();
+  link.click();
+  // celebrate
+  for(let i=0;i<18;i++) setTimeout(()=>spawnConfetti(),i*60);
+}
+
+function spawnConfetti() {
+  const c = document.createElement('div');
+  c.className = 'confetti-piece';
+  const colors = ['#D4A843','#8B1A1A','#F0C96A','#FAF6EE','#E74C3C'];
+  c.style.cssText = `left:${30+Math.random()*40}%;top:30%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-delay:${Math.random()*0.3}s;transform:rotate(${Math.random()*360}deg)`;
+  document.body.appendChild(c);
+  setTimeout(()=>c.remove(),2000);
+}
+
+drawEggBase();
+
+// ── RECIPES ──
+const recipes = [
+  {
+    emoji:'🍞',
+    name:'Кулич пасхальный',
+    desc:'Традиционный воздушный кулич',
+    ingredients:[
+      '500 г муки высшего сорта','250 мл тёплого молока','2 яйца + 2 желтка','150 г сахара','100 г сливочного масла','11 г сухих дрожжей','щепотка соли','ваниль','100 г изюма или цукатов','для глазури: 1 белок + 100 г сахарной пудры + лимонный сок'
+    ],
+    steps:[
+      'Растворите дрожжи в тёплом молоке с 1 ст.л. сахара. Оставьте на 15 минут до появления «шапочки».',
+      'Взбейте яйца с желтками и оставшимся сахаром до пышности. Добавьте мягкое масло.',
+      'Соедините дрожжевую смесь с яичной. Добавьте ваниль и соль.',
+      'Постепенно всыпайте муку, замешивая мягкое эластичное тесто. Вымешивайте 10 минут.',
+      'Накройте и поставьте в тёплое место на 1,5–2 часа. Тесто должно увеличиться вдвое.',
+      'Обомните тесто, добавьте изюм. Наполните форму на ⅓ высоты.',
+      'Оставьте для расстойки на 40–60 минут, затем выпекайте при 180°C 30–40 минут.',
+      'Взбейте белок с сахарной пудрой и лимонным соком. Покройте остывший кулич глазурью.'
+    ]
+  },
+  {
+    emoji:'🧁',
+    name:'Пасха творожная',
+    desc:'Нежное творожное лакомство в форме пирамиды',
+    ingredients:[
+      '1 кг творога (жирного, отжатого)','200 г сливочного масла','200 г сахара','3 желтка','200 мл сливок 33%','ваниль','цедра 1 лимона','100 г изюма (по желанию)'
+    ],
+    steps:[
+      'Творог протрите через сито дважды — масса должна быть очень гладкой.',
+      'Разотрите масло с сахаром добела. Добавьте желтки по одному.',
+      'Взбейте сливки до мягких пиков.',
+      'Соедините творог с масляной смесью, добавьте ваниль и цедру. Перемешайте.',
+      'Аккуратно вмешайте взбитые сливки и изюм.',
+      'Выложите массу в пасочницу или дуршлаг, выстланный марлей. Поставьте под гнёт.',
+      'Уберите в холодильник на 12–24 часа. Выложите на блюдо, украсьте.'
+    ]
+  },
+  {
+    emoji:'🥚',
+    name:'Крашенки в луковой шелухе',
+    desc:'Натуральный способ покраски яиц в красновато-коричневый цвет',
+    ingredients:[
+      '10 куриных яиц','горсть луковой шелухи (лучше красного лука)','1 ст.л. уксуса','1 ч.л. соли','3–4 ст.л. растительного масла для блеска'
+    ],
+    steps:[
+      'Луковую шелуху промойте и залейте 1 литром воды. Варите 30 минут, процедите.',
+      'В остывший отвар добавьте уксус — он закрепит цвет.',
+      'Аккуратно погрузите яйца комнатной температуры в отвар.',
+      'Варите на небольшом огне 20–25 минут.',
+      'Достаньте яйца, сразу натрите растительным маслом — они приобретут красивый глянец.',
+      'Для узора перед варкой обмотайте яйца нитками или положите листики петрушки, зафиксировав плёнкой.'
+    ]
+  }
+];
+
+const recipeList = document.getElementById('recipe-list');
+recipes.forEach((r,i) => {
+  const el = document.createElement('div');
+  el.className = 'recipe-item';
+  el.innerHTML = `
+    <div class="recipe-header" onclick="toggleRecipe(this)">
+      <div class="recipe-header-left">
+        <span class="recipe-emoji">${r.emoji}</span>
+        <div>
+          <div class="recipe-name">${r.name}</div>
+          <div style="font-size:0.85rem;color:var(--parchment-dim);font-style:italic;">${r.desc}</div>
+        </div>
+      </div>
+      <span class="recipe-chevron">▾</span>
+    </div>
+    <div class="recipe-body">
+      <div class="recipe-content">
+        <p class="recipe-subtitle">Ингредиенты</p>
+        <ul class="ingredient-list">${r.ingredients.map(x=>`<li>${x}</li>`).join('')}</ul>
+        <p class="recipe-subtitle">Приготовление</p>
+        <ol class="recipe-steps">${r.steps.map(x=>`<li>${x}</li>`).join('')}</ol>
+      </div>
+    </div>`;
+  recipeList.appendChild(el);
+});
+
+function toggleRecipe(header) {
+  const item = header.parentElement;
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.recipe-item.open').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+// ── SHARE ──
+function copyLink() {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    const btns = document.querySelectorAll('.share-btn');
+    btns[2].textContent = '✓ Скопировано!';
+    setTimeout(() => { btns[2].textContent = 'Скопировать ссылку'; }, 2000);
+  });
+}
+
+// ── SCROLL REVEAL ──
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
